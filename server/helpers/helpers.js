@@ -1,6 +1,6 @@
 require('dotenv').config();
 const axios=require('axios');
-
+const client=require('../utils/redisConnection');
 const rateLimiter = async (request, reply) => {
     const ip = request.info.remoteAddress;
     const currentRoute = request.route.path;
@@ -20,22 +20,22 @@ const rateLimiter = async (request, reply) => {
     }   
 }
   
-async function checkJWTtoken(request, reply) {
-    try {
-            let token=request.state.token;
-            if(jwt.verify(token, process.env.SECRET_KEY)){
-            return reply.continue();}
-            else{
-                throw Boom.unauthorized("Unauthorized");
-            }
+// async function checkJWTtoken(request, reply) {
+//     try {
+//             let token=request.headers.authorization;
+//             if(jwt.verify(token, process.env.SECRET_KEY)){
+//             return reply.continue();}
+//             else{
+//                 throw Boom.unauthorized("Unauthorized");
+//             }
      
-    } catch (error) {
-        if(error.name==="JsonWebTokenError") {
-            return reply(Boom.unauthorized("Unauthorized"));
-        }
-        return reply(error);
-    }
-  }
+//     } catch (error) {
+//         if(error.name==="JsonWebTokenError") {
+//             return reply(Boom.unauthorized("Unauthorized"));
+//         }
+//         return reply(error);
+//     }
+//   }
 //Needs rework
 
 
@@ -50,7 +50,7 @@ async function checkJWTtoken(request, reply) {
   // bulkCreateContents(process.env.TMDB_API_KEY, 8);
   
   module.exports = {
-    checkJWTtoken,
+    // checkJWTtoken,
     rateLimiter
   };
   

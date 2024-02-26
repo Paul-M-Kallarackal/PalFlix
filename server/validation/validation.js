@@ -51,6 +51,10 @@ const pageValidator = Joi.object( {
         pageSize: Joi.number().integer().positive().required()
         }).required('Payload is required').description('Payload is very important');
 
+// const jwtValidator = Joi.object( {
+//     token: Joi.string().required()
+// }).required('Payload is required').description('Payload is very important');
+
 module.exports={
         userValidator,
         loginValidator,
@@ -59,5 +63,7 @@ module.exports={
         movieIdValidator,
         productionCrewIdValidator,
         actorIdValidator,
-        pageValidator
+        pageValidator,
+        // jwtValidator
 }
+

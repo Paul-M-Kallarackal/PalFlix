@@ -21,7 +21,8 @@ const helpers=require('../helpers/helpers');
                 params:validations.movieIdValidator
             },
             pre: [
-                helpers.rateLimiter
+                helpers.rateLimiter,
+                {method:controllers.authControllers.validateJWT}
             ]
         },
         handler: controllers.movieControllers.movieImages
@@ -32,7 +33,10 @@ const helpers=require('../helpers/helpers');
         config: {
             validate: {
                 params:validations.movieIdValidator
-            }
+            },
+            pre:[
+                {method:controllers.authControllers.validateJWT}
+            ]
         },
         handler: controllers.movieControllers.movieDetails
     },
@@ -42,7 +46,10 @@ const helpers=require('../helpers/helpers');
         config: {
             validate: {
                 params:validations.movieIdValidator
-            }
+            },
+            pre:[
+                {method:controllers.authControllers.validateJWT}
+            ]
         },
         handler: controllers.movieControllers.movieCastDetails
     },
@@ -52,7 +59,10 @@ const helpers=require('../helpers/helpers');
         config: {
             validate: {
                 params:validations.movieIdValidator
-            }
+            },
+            pre:[
+                {method:controllers.authControllers.validateJWT}
+            ]
         },
         handler: controllers.movieControllers.movieProductionCrewDetails
     }
@@ -62,7 +72,10 @@ const helpers=require('../helpers/helpers');
         config: {
             validate: {
                 params:validations.movieIdValidator
-            }
+            },
+            pre:[
+                {method:controllers.authControllers.validateJWT}
+            ]
         },
         handler: controllers.movieControllers.movieGenreDetails
     },
@@ -72,7 +85,10 @@ const helpers=require('../helpers/helpers');
         config: {
             validate: {
                 params:validations.genreIdValidator
-            }
+            },
+            pre:[
+                {method:controllers.authControllers.validateJWT}
+            ]
         },
         handler: controllers.movieControllers.viewAllMoviesByGenre
     },
@@ -82,7 +98,10 @@ const helpers=require('../helpers/helpers');
         config: {
             validate: {
                 query:validations.pageValidator
-            }
+            },
+            pre:[
+                {method:controllers.authControllers.validateJWT}
+            ]
         },
         handler: controllers.movieControllers.latestMovies
     },
@@ -92,7 +111,10 @@ const helpers=require('../helpers/helpers');
         config: {
             validate: {
                 query:validations.pageValidator
-            }
+            },
+            pre:[
+                {method:controllers.authControllers.validateJWT}
+            ]
         },
         handler: controllers.movieControllers.topRatedMovies
     }

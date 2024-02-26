@@ -5,8 +5,9 @@ import axios from "axios";
 import { Carousel, Image } from "react-bootstrap";
 import { Heading, Link, Chip, Box, Grid, Text } from "@sparrowengg/twigs-react";
 import CrewCard from "./CrewCard";
-
+import useJWT from "../hooks/useJWT";
 const MovieDescription = () => {
+  const token=useJWT()
   const { movieId } = useParams();
   const [title, setTitle] = useState([]);
   const [description, setDescription] = useState([]);
@@ -20,7 +21,12 @@ const MovieDescription = () => {
       try {
         const response = await axios.get(
           `http://localhost:3000/api/v1/getDetails/${movieId}`,
-        );
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+          );
         setTitle(response.data.title);
         setDescription(response.data.description);
       } catch (error) {
@@ -31,6 +37,11 @@ const MovieDescription = () => {
       try {
         const response = await axios.get(
           `http://localhost:3000/api/v1/getProductionCrews/${movieId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
         );
         setCrew(response.data);
       } catch (error) {
@@ -41,8 +52,14 @@ const MovieDescription = () => {
       try {
         const response = await axios.get(
           `http://localhost:3000/api/v1/getImages/${movieId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
         );
         setImages(response.data.map((image) => image.imageUrl));
+        console.log(response.data);
       } catch (error) {
         console.error(error);
       }
@@ -51,6 +68,11 @@ const MovieDescription = () => {
       try {
         const response = await axios.get(
           `http://localhost:3000/api/v1/getGenres/${movieId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
         );
         setGenres(
           response.data.map((genre) => ({
@@ -66,6 +88,11 @@ const MovieDescription = () => {
       try {
         const response = await axios.get(
           `http://localhost:3000/api/v1/getActors/${movieId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
         );
         setActors(response.data);
       } catch (error) {

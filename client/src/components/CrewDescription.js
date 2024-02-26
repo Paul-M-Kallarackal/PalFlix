@@ -5,14 +5,20 @@ import axios from 'axios'
 import { Heading,Box,Grid } from '@sparrowengg/twigs-react';
 import MovieCard from './MovieCard';
 import CrewCard from './CrewCard';
+import useJWT from '../hooks/useJWT';
 const CrewDescription = () => {
+    const token=useJWT();
     const { crewId } = useParams()
     const [movies, setMovies] = useState([]);
     const [crew, setCrew] = useState([]);
     useEffect(() => {
         const getMovies = async () => {
             try {       
-                const response = await axios.get(`http://localhost:3000/api/v1/crew/${crewId}/getMovies`);
+                const response = await axios.get(`http://localhost:3000/api/v1/crew/${crewId}/getMovies`,{
+                    headers:{
+                        Authorization:`Bearer ${token}`
+                    }
+                });
                 setMovies(response.data);
             } catch (error) {
                 console.error(error);
@@ -21,7 +27,11 @@ const CrewDescription = () => {
         // Write something for me thanks
         const getPersonalDetails = async () => {
             try {
-                const response = await axios.get(`http://localhost:3000/api/v1/crew/${crewId}`);
+                const response = await axios.get(`http://localhost:3000/api/v1/crew/${crewId}`,{
+                    headers:{
+                        Authorization:`Bearer ${token}`
+                    }
+                });
                 setCrew(response.data);
             } catch (error) {
                 console.error(error);
@@ -29,7 +39,7 @@ const CrewDescription = () => {
         }
         getPersonalDetails();
         getMovies();
-    }, [crewId]);
+    }, [crewId,token]);
 
     const renderMovies = () => {
         return (

@@ -4,7 +4,9 @@ import { Grid, Pagination, Heading } from "@sparrowengg/twigs-react";
 import MovieList from "./MovieList";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import useJWT from "../hooks/useJWT";
 const GenreMovies = () => {
+  const token=useJWT()
   const { genreId } = useParams();
   const [url, setUrl] = React.useState(
     `genre/${genreId}/viewAllMovies?page=1&pageSize=8`,
@@ -15,11 +17,16 @@ const GenreMovies = () => {
     async function getGenreName(genreId) {
       const genreName = await axios.get(
         `http://localhost:3000/api/v1/getGenre/${genreId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       setGenreName(genreName.data[0].genre);
     }
     getGenreName(genreId);
-  }, [genreId]);
+  }, [genreId,token]);
 
   return (
     <div>

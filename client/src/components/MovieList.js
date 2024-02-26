@@ -2,13 +2,22 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import MovieCard from "./MovieCard";
 import { Grid, Box } from "@sparrowengg/twigs-react";
-
+import useJWT from "../hooks/useJWT";
 const MovieList = ({ url }) => {
+  const token = useJWT();
   const [movies, setMovies] = useState([]);
   useEffect(() => {
+    console.log(token);
     const getMovies = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/v1/${url}`);
+        const response = await axios.get(
+          `http://localhost:3000/api/v1/${url}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        );
         setMovies(response.data);
       } catch (error) {
         console.error(error);

@@ -8,7 +8,10 @@ const crewRoutes = [
         config:{
             validate:{
                 params:validations.actorIdValidator
-            }
+            },
+            pre:[
+                {method:controllers.authControllers.validateJWT}
+            ]
         },
         handler: controllers.crewControllers.actorDetails
     },
@@ -18,7 +21,10 @@ const crewRoutes = [
         config:{
             validate:{
                 params:validations.actorIdValidator
-            }
+            },
+            pre:[
+                {method:controllers.authControllers.validateJWT}
+            ]
         },
         handler: controllers.crewControllers.actorMovies
     },
@@ -28,7 +34,10 @@ const crewRoutes = [
         config:{
             validate:{
                 params: validations.productionCrewIdValidator
-            }
+            },
+            pre:[
+                {method:controllers.authControllers.validateJWT}
+            ]
         },
         handler:controllers.crewControllers.productionCrewDetails
     },
@@ -38,7 +47,10 @@ const crewRoutes = [
         config:{
             validate:{
                 params: validations.productionCrewIdValidator
-            }
+            },
+            pre:[
+                {method:controllers.authControllers.validateJWT}
+            ]
         },
         handler:controllers.crewControllers.productionCrewMovies
     }

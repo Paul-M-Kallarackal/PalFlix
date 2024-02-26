@@ -7,9 +7,12 @@ const genreRoutes = [
         path: `/${constants.API_VERSION}/getGenre/{genreId}`,
         config: {
             validate: {
-                params:validations.genreIdValidator
-            }
-        },
+                params:validations.genreIdValidator,
+            },
+            pre:[
+                {method:controllers.authControllers.validateJWT}
+            ]
+        }, 
         handler: controllers.genreControllers.genreDetails
     }
 ];

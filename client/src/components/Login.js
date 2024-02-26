@@ -23,19 +23,17 @@ const Login = () => {
     axios
       .post("http://localhost:3000/api/v1/login", { email, password })
       .then((response) => {
-        if (response.ok) {
           const token = response.data.token;
+          if(token){
           localStorage.setItem("token", token);
           toast.success("Login successful");
           setTimeout(() => {
             navigate("/dashboard");
           }, 2000);
-        } else {
-          toast.error("Invalid credentials, Please try again!");
         }
       })
       .catch((error) => {
-        toast.error(error.message);
+        toast.error("Invalid credentials, Please try again!");
       });
   };
 

@@ -3,8 +3,9 @@ import { useParams } from "react-router-dom";
 import Navbar from "./Navbar";
 import { Grid, Heading, Pagination } from "@sparrowengg/twigs-react";
 import MovieList from "./MovieList";
-
+import useJWT from "../hooks/useJWT";
 const SpecialMovies = () => {
+  useJWT()
   let displayName;
   const { movieType } = useParams();
   const [url, setUrl] = React.useState(`movies/${movieType}?page=1&pageSize=8`);
