@@ -23,7 +23,7 @@ db.crew.hasMany(db.productionCrew, { foreignKey: 'person_id' });
 db.movies.belongsToMany(db.actors, {  through: "movie_actor", foreignKey: 'movie_id' });
 db.actors.belongsToMany(db.movies, {  through: "movie_actor" ,foreignKey: 'person_id'});
 // db.sequelize.sync({ force: false ,alter:true}).then(async () => {
-//     console.log("yes re-sync done!");
+//     ("yes re-sync done!");
 // });
 
 module.exports = db;

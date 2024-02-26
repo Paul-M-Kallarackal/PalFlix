@@ -1,15 +1,16 @@
 axios = require('axios');
 const db = require('./models/models');
 const client = require('./utils/elasticConnection');
+const logger= require('./utils/logConnection');
 async function hitBackendMultipleTimes(numberOfRequests, start) {
     for (let i = start; i < numberOfRequests + start; i++) {
         try {
             // Make a request to your backend endpoint here
             await axios.get(`http://localhost:3000/api/v1/bulkmoviecreation?page=${i}`);
             // Process the response if needed
-            console.log(`Request ${i} successful`);
+            logger.info(`Request ${i} successful`);
         } catch (error) {
-            console.error(`Request ${i} failed: ${error}`);
+            logger.error(`Request ${i} failed: ${error}`);
         }
        // Wait for 10 seconds
     }
@@ -27,9 +28,9 @@ async function loadIntoElasticSearch() {
                     genre: genre.genre
                 }
             });
-            console.log(`Genre ${genre.genreId} loaded into Elasticsearch`);
+            logger.info(`Genre ${genre.genreId} loaded into Elasticsearch`);
         } catch (error) {
-            console.error(`Failed to load genre ${genre.genreId} into Elasticsearch: ${error}`);
+            logger.error(`Failed to load genre ${genre.genreId} into Elasticsearch: ${error}`);
         }
     }
 }

@@ -1,4 +1,5 @@
 const { Client } = require('@elastic/elasticsearch');
+const logger = require('../utils/logConnection');
 async function ingestData(movieData, moviegenresData) {
     const client = new Client({ node: 'http://localhost:9200' });
 
@@ -24,9 +25,9 @@ async function ingestData(movieData, moviegenresData) {
             ])
         });
 
-        console.log('Data ingested successfully into Elasticsearch.');
+        logger.info('Data ingested successfully into Elasticsearch.');
     } catch (error) {
-        console.error('Error ingesting data into Elasticsearch:', error);
+        logger.error('Error ingesting data into Elasticsearch:', error);
     }
 }
 

@@ -15,7 +15,6 @@ const ActorDescription =() => {
             try {       
                 const response = await axios.get(`http://localhost:3000/api/v1/actors/${actorId}/getMovies`);
                 setMovies(response.data);
-                console.log(response.data);
             } catch (error) {
                 console.error(error);
             }
@@ -23,7 +22,6 @@ const ActorDescription =() => {
         const getPersonalDetails = async () => {
             try {
                 const response = await axios.get(`http://localhost:3000/api/v1/actors/${actorId}`);
-                console.log(response.data);
                 setActor(response.data);
             } catch (error) {
                 console.error(error);
@@ -34,7 +32,6 @@ const ActorDescription =() => {
     }, [actorId]);
 
     const renderMovies = () => {
-        console.log(movies);
         return (
             <Box css={{ display: 'flex', justifyContent: 'left' ,marginLeft:'120px',margin:'auto', overflow: 'scroll' }}>
             {movies.map((movie) => (
@@ -49,7 +46,6 @@ const ActorDescription =() => {
             <Grid>
             <Box
             css={{
-                backgroundImage: `url(${actor.imageUrl})`,
                 width: 300,
                 height: 300,
                 backgroundSize: 'cover',

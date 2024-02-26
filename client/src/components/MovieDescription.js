@@ -95,7 +95,6 @@ const MovieDescription = () => {
   ));
 
   const renderActors = () => {
-    console.log(actors);
     return (
       <Box css={{ display: "flex", justifyContent: "center" }}>
         {actors.map((actor) => (

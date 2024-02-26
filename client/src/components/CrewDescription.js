@@ -14,7 +14,6 @@ const CrewDescription = () => {
             try {       
                 const response = await axios.get(`http://localhost:3000/api/v1/crew/${crewId}/getMovies`);
                 setMovies(response.data);
-                console.log(response.data);
             } catch (error) {
                 console.error(error);
             }
@@ -23,7 +22,6 @@ const CrewDescription = () => {
         const getPersonalDetails = async () => {
             try {
                 const response = await axios.get(`http://localhost:3000/api/v1/crew/${crewId}`);
-                console.log(response.data);
                 setCrew(response.data);
             } catch (error) {
                 console.error(error);
@@ -34,7 +32,6 @@ const CrewDescription = () => {
     }, [crewId]);
 
     const renderMovies = () => {
-        console.log(movies);
         return (
             <Box css={{ display: 'flex',justifyContent: 'left' ,margin:'auto', overflow: 'scroll', maxWidth:'100%' }}>
             {movies.map((movie) => (
@@ -66,7 +63,6 @@ const CrewDescription = () => {
             </Box>
            <Box><Heading size={'h2'} css={{ textAlign: 'left', marginLeft: '120px', marginTop: '20px', color: 'white', }}>{crew.name}</Heading></Box> 
             <Box><Heading size={'h6'} css={{ textAlign: 'left', marginLeft: '120px', marginTop: '20px', color: 'white', }}>{crew.gender}</Heading></Box>
-            
             </Grid>
                 <Heading
                     size={'h4'}

@@ -1,6 +1,7 @@
 const constants=require('../constants/constants');
 const controllers=require('../controllers/index');
 const validations=require('../validation/validation');
+const helpers=require('../helpers/helpers');
  const movieRoutes = [
     // {
     //     method: 'GET',
@@ -18,7 +19,10 @@ const validations=require('../validation/validation');
         config: {
             validate: {
                 params:validations.movieIdValidator
-            }
+            },
+            pre: [
+                helpers.rateLimiter
+            ]
         },
         handler: controllers.movieControllers.movieImages
     },

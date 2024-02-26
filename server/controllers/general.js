@@ -102,7 +102,6 @@ async function BulkCrews(request, reply) {
         const productionCrewData = [];
         for (const movie of movies) {
             const movieId = movie.movieId;
-            console.log(movieId);
             const crewList = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${api_key}&language=en-US`);
 
             for (const cast of crewList.data.cast) {

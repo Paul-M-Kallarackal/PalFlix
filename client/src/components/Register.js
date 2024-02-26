@@ -25,18 +25,9 @@ const Register = () => {
     formData.append("email", email);
     formData.append("password", password);
     axios
-      .post("http://localhost:3000/api/v1/register", {
-        body: formData,
-      })
+      .post("http://localhost:3000/api/v1/register", formData)
       .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error(response.statusText);
-        }
-      })
-      .then((data) => {
-        const token = data.token;
+        const token = response.data.token;
         localStorage.setItem("token", token);
         toast.success("Registration successful");
         setTimeout(() => {
@@ -44,8 +35,7 @@ const Register = () => {
         }, 2000);
       })
       .catch((error) => {
-        console.error("Error:", error);
-        toast.error(error.message || "An error occurred");
+        toast.error(error.response.data.message || "An error occurred");
       });
   };
 

@@ -1,6 +1,6 @@
 const Hapi = require('hapi');
 const server = new Hapi.Server();
-
+const Logger = require('./logConnection');
 server.connection({
     host: 'localhost',
     port: 3000,
@@ -14,16 +14,16 @@ function initializeServer() {
         if (err) {
             throw err;
         }
-        console.log(`Server running at: ${server.info.uri}`);
+        Logger.info(`Server running at: ${server.info.uri}`);
     });
 }
 
 process.on('SIGTSTP', () => {
     server.stop({ timeout: 10000 }).then(() => {
-        console.log('Server stopped');
+        Logger.info('Server stopped');
         process.exit(0);
     }).catch((err) => {
-        console.error('Error stopping server:', err);
+        Logger.error('Error stopping server:', err);
         process.exit(1);
     });
 });

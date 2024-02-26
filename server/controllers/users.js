@@ -17,12 +17,12 @@ async function createAccount(request, reply) {
             password: hashedPassword
         });
         db.users.afterCreate((user) => {
-            console.log(`New user created: ${user.username}`);
+            Logger.info(`New user created: ${user.username}`, { label: 'Create Account' });
         });
         const token = jwt.sign({ user: payload.email }, process.env.SECRET_KEY, { expiresIn: '1h' });
         reply({ "token": token }).code(200).state('token', token);
     } catch (error) {
-        console.error(error);
+        Logger.error(error, { label: 'Create Account' });
         reply("An error occurred").code(500);
     }
 }
@@ -38,7 +38,6 @@ function hashValues(data) {
                         if (err) {
                             reject(err);
                         } else {
-                            console.log(hash);
                             resolve(hash);
                         }
                     });
@@ -60,7 +59,6 @@ async function Login (request, reply) {
     else{
         bcrypt.compare(payload.password, users.password, async function(err, res) {
             if(res){
-                console.log(res);
                 const token=jwt.sign({ user : payload.email }, process.env.SECRET_KEY, { expiresIn: '1h' });
                 Logger.info(`User ${payload.email} logged in`, { label: 'Login' })
                 reply({"token":token}).code(200).state('token', token);
@@ -94,9 +92,7 @@ async function getAllUsers(request, reply) {
 }
 
 async function checkUniqueUser(request, reply) {
-    console.log(request.payload);
     const users= await getUserByEmail(request.payload.email);
-    console.log(users);
     if(users!=null){
         reply(Boom.conflict('User already exists'));
     }

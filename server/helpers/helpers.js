@@ -6,7 +6,6 @@ const rateLimiter = async (request, reply) => {
     const currentRoute = request.route.path;
     const currentMethod = request.route.method;
     const key = `${ip}:${currentRoute}:${currentMethod}`;
-    console.log(key);
     const currentCount = await client.get(key);
     if (currentCount === null) {
         client.set(key, 1, 'EX', 60);
@@ -24,7 +23,6 @@ const rateLimiter = async (request, reply) => {
 async function checkJWTtoken(request, reply) {
     try {
             let token=request.state.token;
-            console.log(jwt.verify(token, process.env.SECRET_KEY))
             if(jwt.verify(token, process.env.SECRET_KEY)){
             return reply.continue();}
             else{
