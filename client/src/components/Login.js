@@ -23,12 +23,12 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    callApi("post", "/login", { email, password })
+    callApi("post", "/login",{ email, password })
       .then((response) => {
-          const token = response.data.token;
+          const token = response.token;
           if(token){
           localStorage.setItem("token", token);
-          dispatch(setUserDetails(response.data.user));
+          dispatch(setUserDetails(response.user));
           toast.success("Login successful");
           setTimeout(() => {
             navigate("/dashboard");

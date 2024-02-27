@@ -21,7 +21,7 @@ const helpers=require('../helpers/helpers');
                 params:validations.movieIdValidator
             },
             pre: [
-                helpers.rateLimiter,
+                // helpers.rateLimiter,
                 {method:controllers.authControllers.validateJWT}
             ]
         },

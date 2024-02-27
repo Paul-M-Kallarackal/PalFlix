@@ -16,7 +16,7 @@ const GenreMovies = () => {
   useEffect(() => {
     async function getGenreName(genreId) {
       const genreName = await callApi("get",`/genre/${genreId}`);
-      setGenreName(genreName.data[0].genre);
+      setGenreName(genreName[0].genre);
     }
     getGenreName(genreId);
   }, [genreId]);

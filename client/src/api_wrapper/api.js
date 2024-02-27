@@ -6,7 +6,7 @@ async function createApi(method, url, body) {
     const api = await axios({
     method,
     url:baseURL+url,
-    body,
+    data:body,
     headers:{
        Authorization: `Bearer ${token}`,
     },

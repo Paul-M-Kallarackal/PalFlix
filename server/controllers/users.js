@@ -139,8 +139,32 @@ async function deleteUser(request, reply) {
     reply({"Deleted user":user});
 }
 
+async function userDisplayDetails(request,reply){
+    try{
+    const token=request.headers.authorization.split(' ')[1];
+    const object=jwt.verify(token,process.env.SECRET_KEY)
+    if(object.user){
+        const user= await db.users.findOne({
+            where: {
+              email: object.user
+            }
+          });
+        reply({username:user.username,email:user.email});
+    }
+    else{
+        reply(Boom.unauthorized("Unauthorized"));
+    }}
+    catch(error){
+        if(error.name==="JsonWebTokenError") {
+            return reply(Boom.unauthorized("Unauthorized"));
+        }
+        return reply(error);
+    }
+}
+
+
 module.exports = {
     createAccount,hashValues,deleteUser,updateUser,
     Login,getUserByEmail,getUserById,getAllUsers,
-    checkUniqueUser
+    checkUniqueUser,userDisplayDetails
 }

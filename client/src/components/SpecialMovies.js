@@ -4,6 +4,7 @@ import Navbar from "./Navbar";
 import { Grid, Heading, Pagination } from "@sparrowengg/twigs-react";
 import MovieList from "./MovieList";
 import useJWT from "../hooks/useJWT";
+
 const SpecialMovies = () => {
   useJWT()
   let displayName;

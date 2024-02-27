@@ -4,7 +4,7 @@ const validations = require('../validation/validation');
 const genreRoutes = [
     {
         method: 'GET',
-        path: `/${constants.API_VERSION}/getGenre/{genreId}`,
+        path: `/${constants.API_VERSION}/genre/{genreId}`,
         config: {
             validate: {
                 params:validations.genreIdValidator,

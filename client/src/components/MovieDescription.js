@@ -19,7 +19,7 @@ const MovieDescription = () => {
   useEffect(() => {
     const getDetails = async () => {
       try {
-        const response = await callApi("get",`/movie/${movieId}`);
+        const response = await callApi("get",`/getDetails/${movieId}`);
         setTitle(response.title);
         setDescription(response.description);
       } catch (error) {
@@ -37,6 +37,8 @@ const MovieDescription = () => {
     const getImages = async () => {
       try {
         const response = await callApi("get",`/getImages/${movieId}`);
+        console.log(response)
+        if(response.length>0)
         setImages(response.map((image) => image.imageUrl));
       } catch (error) {
         console.error(error);

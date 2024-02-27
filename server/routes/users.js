@@ -8,6 +8,11 @@ const userRoutes = [
         handler: controllers.userControllers.getAllUsers,
 },
 {
+    method:'GET',
+    path:`/${constants.API_VERSION}/userDisplayDetails`,
+    handler:controllers.userControllers.userDisplayDetails,
+},
+{
     method: 'GET',
     path: `/${constants.API_VERSION}/users/user/{userId}`,
     config: {

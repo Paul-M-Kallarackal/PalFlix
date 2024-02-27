@@ -12,10 +12,10 @@ import ActorDescription from './components/ActorDescription';
 function App() {
   return (
     <>
-      <BrowserRouter>
+      <BrowserRouter basename='/'>
         <Routes>
           <Route path="/" element={<Login />} /> 
-          <Route path="/register" element={<Register />} />
+          <Route path="/register" element={<Register />}  />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/title/:movieId" element={<MovieDescription/>} />
           <Route path="/genres/:genreId" element={<GenreMovies/>} />

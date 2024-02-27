@@ -2,10 +2,7 @@ import React from "react";
 import { Text, Box, Button, Grid} from "@sparrowengg/twigs-react";
 import { Link } from "react-router-dom";
 import logo from "../assets/Logo.png";
-import { useSelector } from "react-redux";
 const Navbar = () => {
-  const user = useSelector((state) => state.user.user);
-  console.log(user)
   const Logout = () => {
     localStorage.removeItem("token");
     window.location.href = "/";
@@ -62,7 +59,6 @@ const Navbar = () => {
             fontSize: "20px",
           }}
         >
-          {user?.username}
         </Text>
         </Box>
 

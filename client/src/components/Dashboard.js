@@ -1,9 +1,11 @@
 import React from "react";
 import Navbar from "./Navbar";
+import UserGreeting from "./UserGreeting";
 import { Grid, Box, Heading } from "@sparrowengg/twigs-react";
 import MovieList from "./MovieList";
 import { Link } from "react-router-dom";
 const Dashboard = () => {
+
   const MovieCarousels = [
     {
       name: "LatestMovies",
@@ -11,7 +13,7 @@ const Dashboard = () => {
       page: 1,
       pageSize: 4,
       url: "movies/latestMovies?page=1&pageSize=4",
-      fullLink: "movies/latestMovies",
+      fullLink: "/movies/latestMovies",
     },
     {
       name: "RomanceGenre",
@@ -19,7 +21,7 @@ const Dashboard = () => {
       page: 1,
       pageSize: 4,
       url: "genre/10749/viewAllMovies?page=1&pageSize=4",
-      fullLink: "genres/10749",
+      fullLink: "/genres/10749",
     },
     {
       name: "RecommendedMovies",
@@ -27,7 +29,7 @@ const Dashboard = () => {
       page: 1,
       pageSize: 4,
       url: "movies/topRated?page=1&pageSize=4",
-      fullLink: "movies/topRated",
+      fullLink: "/movies/topRated",
     },
     {
       name: "TopRated",
@@ -35,7 +37,7 @@ const Dashboard = () => {
       page: 1,
       pageSize: 4,
       url: "movies/topRated?page=1&pageSize=4",
-      fullLink: "movies/topRated",
+      fullLink: "/movies/topRated",
     },
   ];
 
@@ -43,6 +45,7 @@ const Dashboard = () => {
     <div>
       <Navbar />
       <Grid gap="10" columns="repeat(auto-fill, minmax(300px, 1fr))">
+      <UserGreeting/>
         {MovieCarousels.map((carousel, index) => (
           <React.Fragment key={index}>
             <Box
