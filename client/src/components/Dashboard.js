@@ -1,8 +1,8 @@
 import React from "react";
 import Navbar from "./Navbar";
-import { Grid, Box, Link, Heading } from "@sparrowengg/twigs-react";
+import { Grid, Box, Heading } from "@sparrowengg/twigs-react";
 import MovieList from "./MovieList";
-
+import { Link } from "react-router-dom";
 const Dashboard = () => {
   const MovieCarousels = [
     {
@@ -74,7 +74,7 @@ const Dashboard = () => {
               }}
             >
               <Link
-                href={carousel.fullLink}
+                to={carousel.fullLink}
                 size={"lg"}
                 css={{
                   color: "white",

@@ -1,7 +1,7 @@
 
 import React from 'react'
-import { Box, Heading, Text, Flex, Chip,DialogsManager,dialogs,Button,Link} from '@sparrowengg/twigs-react';
-
+import { Box, Heading, Text, Flex, Chip,DialogsManager,dialogs,Button} from '@sparrowengg/twigs-react';
+import {Link} from 'react-router-dom';
 const MovieCard = ({ movieId,title,description,releaseDate,imageUrl }) => {
   releaseDate=releaseDate?.split('T')[0];  
   return (
@@ -72,7 +72,7 @@ const MovieCard = ({ movieId,title,description,releaseDate,imageUrl }) => {
               backgroundColor: '$black800',
             }
           }}>
-            <Link href={'/title/'+movieId} size='lg' css={{color: '$white900'}}>View Details</Link>
+            <Link to={'/title/'+movieId} size='lg' css={{color: '$white900'}}>View Details</Link>
           </Button>
           </Flex>
         </Box>

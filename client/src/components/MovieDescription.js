@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "./Navbar";
-import { useParams } from "react-router-dom";
+import { Link,useParams } from "react-router-dom";
 import { Carousel, Image } from "react-bootstrap";
-import { Heading, Link, Chip, Box, Grid, Text } from "@sparrowengg/twigs-react";
+import { Heading,  Chip, Box, Grid, Text } from "@sparrowengg/twigs-react";
 import CrewCard from "./CrewCard";
 import useJWT from "../hooks/useJWT";
 import callApi from "../api_wrapper/api";
@@ -89,7 +89,7 @@ const MovieDescription = () => {
     return (
       <Box css={{ display: "flex", justifyContent: "center" }}>
         {actors.map((actor) => (
-          <Link key={actor.personId} href={`/actors/${actor.personId}`}>
+          <Link key={actor.personId} to={`/actors/${actor.personId}`}>
             <CrewCard
               key={actor.personId}
               personId={actor.personId}
@@ -106,7 +106,7 @@ const MovieDescription = () => {
     return (
       <Box css={{ display: "flex", justifyContent: "center" }}>
         {crew.map((crew, index) => (
-          <Link key={index} href={`/crew/${crew.Crew.personId}`}>
+          <Link key={index} to={`/crew/${crew.Crew.personId}`}>
             <CrewCard
               key={index}
               name={crew.Crew.name}
@@ -166,7 +166,7 @@ const MovieDescription = () => {
           }}
         >
           {genres.map((genre, index) => (
-            <Link key={index} href={`/genres/${genre.genreId}`}>
+            <Link key={index} to={`/genres/${genre.genreId}`}>
               <Chip
                 size={"lg"}
                 css={{
