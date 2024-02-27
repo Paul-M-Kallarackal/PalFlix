@@ -61,7 +61,7 @@ async function Login (request, reply) {
             if(res){
                 const token=jwt.sign({ user : payload.email }, process.env.SECRET_KEY, { expiresIn: '1h' });
                 Logger.info(`User ${payload.email} logged in`, { label: 'Login' })
-                reply({"token":token}).code(200).state('token', token);
+                reply({"token":token, "user":{username:users.username, email:users.email}}).code(200).state('token', token);
             }
             else{
                 reply("Incorrect credentials").code(404);

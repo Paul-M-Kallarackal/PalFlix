@@ -1,25 +1,21 @@
 import React, { useState, useEffect } from 'react'
 import Navbar from './Navbar'
 import { useParams } from 'react-router-dom'
-import axios from 'axios'
 import { Heading,Box,Grid } from '@sparrowengg/twigs-react';
 import MovieCard from './MovieCard';
 import CrewCard from './CrewCard';
 import useJWT from '../hooks/useJWT';
+import callApi from '../api_wrapper/api';
 const CrewDescription = () => {
-    const token=useJWT();
+    useJWT();
     const { crewId } = useParams()
     const [movies, setMovies] = useState([]);
     const [crew, setCrew] = useState([]);
     useEffect(() => {
         const getMovies = async () => {
             try {       
-                const response = await axios.get(`http://localhost:3000/api/v1/crew/${crewId}/getMovies`,{
-                    headers:{
-                        Authorization:`Bearer ${token}`
-                    }
-                });
-                setMovies(response.data);
+                const response = await callApi('get',`/crew/${crewId}/getMovies`);
+                setMovies(response);
             } catch (error) {
                 console.error(error);
             }
@@ -27,20 +23,16 @@ const CrewDescription = () => {
         // Write something for me thanks
         const getPersonalDetails = async () => {
             try {
-                const response = await axios.get(`http://localhost:3000/api/v1/crew/${crewId}`,{
-                    headers:{
-                        Authorization:`Bearer ${token}`
-                    }
-                });
-                setCrew(response.data);
+                const response = await callApi('get',`/crew/${crewId}`);
+                setCrew(response);
             } catch (error) {
                 console.error(error);
             }
         }
         getPersonalDetails();
         getMovies();
-    }, [crewId,token]);
-
+    }, [crewId]);
+                    
     const renderMovies = () => {
         return (
             <Box css={{ display: 'flex',justifyContent: 'left' ,margin:'auto', overflow: 'scroll', maxWidth:'100%' }}>

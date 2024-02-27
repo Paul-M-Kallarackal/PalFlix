@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/Logo.png";
-import axios from "axios";
+
 import {
   Box,
   ThemeProvider,
@@ -13,6 +13,7 @@ import {
   Text,
 } from "@sparrowengg/twigs-react";
 import "react-toastify/dist/ReactToastify.css";
+import callApi from "../api_wrapper/api";
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -24,8 +25,7 @@ const Register = () => {
     formData.append("username", username);
     formData.append("email", email);
     formData.append("password", password);
-    axios
-      .post("http://localhost:3000/api/v1/register", formData)
+    callApi("post", "/register", formData)
       .then((response) => {
         const token = response.data.token;
         localStorage.setItem("token", token);

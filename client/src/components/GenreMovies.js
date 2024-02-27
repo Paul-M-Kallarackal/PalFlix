@@ -3,10 +3,10 @@ import Navbar from "./Navbar";
 import { Grid, Pagination, Heading } from "@sparrowengg/twigs-react";
 import MovieList from "./MovieList";
 import { useParams } from "react-router-dom";
-import axios from "axios";
 import useJWT from "../hooks/useJWT";
+import callApi from "../api_wrapper/api";
 const GenreMovies = () => {
-  const token=useJWT()
+  useJWT()
   const { genreId } = useParams();
   const [url, setUrl] = React.useState(
     `genre/${genreId}/viewAllMovies?page=1&pageSize=8`,
@@ -15,18 +15,11 @@ const GenreMovies = () => {
   const [genreName, setGenreName] = React.useState("");
   useEffect(() => {
     async function getGenreName(genreId) {
-      const genreName = await axios.get(
-        `http://localhost:3000/api/v1/getGenre/${genreId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const genreName = await callApi("get",`/genre/${genreId}`);
       setGenreName(genreName.data[0].genre);
     }
     getGenreName(genreId);
-  }, [genreId,token]);
+  }, [genreId]);
 
   return (
     <div>

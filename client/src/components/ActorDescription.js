@@ -1,48 +1,37 @@
 import React from 'react'
 import Navbar from './Navbar'
 import { useParams } from 'react-router-dom'
-import axios from 'axios'
 import { Heading, Box,Grid } from '@sparrowengg/twigs-react';
 import MovieCard from './MovieCard';
 import CrewCard from './CrewCard';
 import { useEffect, useState } from 'react';
+import callApi from '../api_wrapper/api';
 import useJWT from '../hooks/useJWT';
 const ActorDescription =() => {
-    const {token}=useJWT()
-
+    useJWT()
     const { actorId } = useParams()
     const [movies, setMovies] = useState([]);
     const [actor, setActor] = useState([]);
     useEffect(() => {
         const getMovies = async () => {
             try {       
-                console.log(token)
-                const response = await axios.get(`http://localhost:3000/api/v1/actors/${actorId}/getMovies`,{
-                    headers:{
-                        Authorization:`Bearer ${token}`
-                    }
-                }
-                );
-                setMovies(response.data);
+                const response = await callApi('get',`/actors/${actorId}/getMovies`);
+                setMovies(response);
             } catch (error) {
                 console.error(error);
             }
         };
         const getPersonalDetails = async () => {
             try {
-                const response = await axios.get(`http://localhost:3000/api/v1/actors/${actorId}`,{
-                    headers:{
-                        Authorization:`Bearer ${token}`
-                    }
-                });
-                setActor(response.data);
+                const response = await callApi('get',`/actors/${actorId}`);
+                setActor(response);
             } catch (error) {
                 console.error(error);
             }
         }
         getPersonalDetails();
         getMovies();
-    }, [actorId,token]);
+    }, [actorId]);
 
     const renderMovies = () => {
         return (

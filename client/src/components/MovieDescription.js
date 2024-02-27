@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "./Navbar";
 import { useParams } from "react-router-dom";
-import axios from "axios";
 import { Carousel, Image } from "react-bootstrap";
 import { Heading, Link, Chip, Box, Grid, Text } from "@sparrowengg/twigs-react";
 import CrewCard from "./CrewCard";
 import useJWT from "../hooks/useJWT";
+import callApi from "../api_wrapper/api";
 const MovieDescription = () => {
   const token=useJWT()
   const { movieId } = useParams();
@@ -19,63 +19,34 @@ const MovieDescription = () => {
   useEffect(() => {
     const getDetails = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:3000/api/v1/getDetails/${movieId}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-          );
-        setTitle(response.data.title);
-        setDescription(response.data.description);
+        const response = await callApi("get",`/movie/${movieId}`);
+        setTitle(response.title);
+        setDescription(response.description);
       } catch (error) {
         console.error(error);
       }
     };
     const getCrew = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:3000/api/v1/getProductionCrews/${movieId}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        setCrew(response.data);
+        const response = await callApi("get",`/getProductionCrews/${movieId}`);
+        setCrew(response);
       } catch (error) {
         console.error(error);
       }
     };
     const getImages = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:3000/api/v1/getImages/${movieId}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        setImages(response.data.map((image) => image.imageUrl));
-        console.log(response.data);
+        const response = await callApi("get",`/getImages/${movieId}`);
+        setImages(response.map((image) => image.imageUrl));
       } catch (error) {
         console.error(error);
       }
     };
     const getGenres = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:3000/api/v1/getGenres/${movieId}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const response = await callApi("get",`/getGenres/${movieId}`);
         setGenres(
-          response.data.map((genre) => ({
+          response.map((genre) => ({
             genre: genre.genre,
             genreId: genre.genreId,
           })),
@@ -86,15 +57,8 @@ const MovieDescription = () => {
     };
     const getActors = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:3000/api/v1/getActors/${movieId}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        setActors(response.data);
+        const response = await callApi("get",`/getActors/${movieId}`);
+        setActors(response);
       } catch (error) {
         console.error(error);
       }
@@ -104,7 +68,7 @@ const MovieDescription = () => {
     getDetails(movieId);
     getCrew(movieId);
     getActors(movieId);
-  }, [movieId]);
+  }, [movieId,token]);
 
   const carouselItems = Array.from({ length: 4 }, (_, index) => (
     <Carousel.Item key={index}>
