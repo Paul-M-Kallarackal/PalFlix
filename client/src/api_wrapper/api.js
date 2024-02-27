@@ -11,11 +11,9 @@ async function createApi(method, url, body) {
        Authorization: `Bearer ${token}`,
     },
   })
-  console.log(api.data)
   return api.data;
   }
   catch(error){
-    console.log(error)
     return error;
   }
 }
