@@ -43,8 +43,9 @@ const ActorDescription =() => {
     };
     return (
         <>
+
             <Navbar />
-            <div>
+     
             <Grid>
             <Box
             css={{
@@ -57,7 +58,7 @@ const ActorDescription =() => {
                 marginLeft: '$50',
             
             }}>
-            <CrewCard key={actor.personId} name={""} role={""} imageUrl={actor.imageUrl}/>
+            <CrewCard key={actor.personId}  {...actor}/>
             </Box>
            <Box><Heading size={'h2'} css={{ textAlign: 'left', marginLeft: '120px', marginTop: '20px', color: 'white', }}>{actor.name}</Heading></Box> 
             <Box><Heading size={'h6'} css={{ textAlign: 'left', marginLeft: '120px', marginTop: '20px', color: 'white', }}>{actor.gender}</Heading></Box>
@@ -71,8 +72,7 @@ const ActorDescription =() => {
                         marginTop: '20px',
                         color: 'white',
                     }} >Movies</Heading>
-                    {renderMovies()}
-            </div>
+            {renderMovies()}
         </>
     )
 }

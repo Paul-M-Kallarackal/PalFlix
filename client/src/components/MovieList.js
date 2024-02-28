@@ -24,7 +24,6 @@ const MovieList = ({ url }) => {
       { length: Math.ceil(movies.length / 4) },
       (_, index) => movies.slice(index * 4, index * 4 + 4),
     );
-
     return moviesChunks.map((chunk, index) => (
       <Box key={index} css={{ display: "flex", justifyContent: "center" }}>
         {chunk.map((movie) => (

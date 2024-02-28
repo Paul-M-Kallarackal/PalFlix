@@ -12,7 +12,7 @@ import ActorDescription from './components/ActorDescription';
 function App() {
   return (
     <>
-      <BrowserRouter basename='/'>
+      <BrowserRouter>
         <Routes>
           <Route path="/" element={<Login />} /> 
           <Route path="/register" element={<Register />}  />
@@ -24,6 +24,7 @@ function App() {
           <Route path="/crew/:crewId" element={<CrewDescription/>} />
         </Routes>
       </BrowserRouter>
+    
     </>
   );
 }

@@ -61,7 +61,7 @@ const CrewDescription = () => {
                 marginLeft: '$50',
             
             }}>
-            <CrewCard key={crew.personId} name={""} role={""} imageUrl={crew.imageUrl}/>
+            <CrewCard key={crew.personId} imageUrl={crew.imageUrl}/>
             </Box>
            <Box><Heading size={'h2'} css={{ textAlign: 'left', marginLeft: '120px', marginTop: '20px', color: 'white', }}>{crew.name}</Heading></Box> 
             <Box><Heading size={'h6'} css={{ textAlign: 'left', marginLeft: '120px', marginTop: '20px', color: 'white', }}>{crew.gender}</Heading></Box>

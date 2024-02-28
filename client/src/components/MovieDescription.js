@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "./Navbar";
-import { Link,useParams } from "react-router-dom";
+import { useParams ,Link} from "react-router-dom";
 import { Carousel, Image } from "react-bootstrap";
 import { Heading,  Chip, Box, Grid, Text } from "@sparrowengg/twigs-react";
 import CrewCard from "./CrewCard";
@@ -90,11 +90,10 @@ const MovieDescription = () => {
   const renderActors = () => {
     return (
       <Box css={{ display: "flex", justifyContent: "center" }}>
-        {actors.map((actor) => (
-          <Link key={actor.personId} to={`/actors/${actor.personId}`}>
+        {actors.map((actor,index) => (
+          <Link key={index} to={`/actors/${actor.personId}`}>
             <CrewCard
               key={actor.personId}
-              personId={actor.personId}
               name={actor.Crew.name}
               role={actor.role}
               imageUrl={actor.Crew.imageUrl}
@@ -108,7 +107,7 @@ const MovieDescription = () => {
     return (
       <Box css={{ display: "flex", justifyContent: "center" }}>
         {crew.map((crew, index) => (
-          <Link key={index} to={`/crew/${crew.Crew.personId}`}>
+          <Link key={index} to={`/crew/${crew.personId}`}>
             <CrewCard
               key={index}
               name={crew.Crew.name}

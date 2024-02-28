@@ -76,14 +76,17 @@ const Dashboard = () => {
                 paddingRight: 200,
               }}
             >
+
               <Link
                 to={carousel.fullLink}
-                size={"lg"}
-                css={{
+                style={{
                   color: "white",
-                  fontSize: "$lg",
+                  fontSize: "1rem",
                   fontWeight: "bold",
-                  height: "40px",
+                  textAlign: "right",
+                  marginRight: "120px",
+                  textDecoration: "none",
+                  padding : "10px",
                 }}
               >
                 View All
